@@ -43,35 +43,5 @@ Vodič: Upravlja izletom i sudionicima.
 
 Dizajn baze podataka
 
-Tablica: Korisnici
+![image](https://github.com/user-attachments/assets/ca9d5467-0e14-4ea6-b347-42dd11554abb)
 
-id (Primarni ključ)
-korisničko_ime (String)
-lozinka (String)
-email (String)
-uloga (Enum: "booker", "vodič", "admin")
-
-Tablica: Izleti
-
-id (Primarni ključ)
-naziv_izleta (String)
-datum (Datum)
-lokacija (String)
-kapacitet (Integer)
-vodič_id (Strani ključ na tablicu Korisnici)
-
-
-Tablica: Rezervacije
-
-id (Primarni ključ)
-korisnik_id (Strani ključ na tablicu Korisnici)
-izlet_id (Strani ključ na tablicu Izleti)
-broj_osoba (Integer)
-
-Tablica: Sudionici
-
-id (Primarni ključ)
-rezervacija_id (Strani ključ na tablicu Rezervacije)
-ime (String)
-dob (Integer)
-preferencije (Text)
