@@ -2,6 +2,10 @@
 
 ## TRAVEL ORGANIZATION AND BOOKING APPLICATION
 
+### Developers
+- Duje Nizić
+- Martina Vukojević
+
 **Booking Trips Application**
 
 This application is designed for managing trip reservations and organizing excursions. The system allows various users to log in and manage trip bookings according to their roles
