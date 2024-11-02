@@ -26,9 +26,9 @@ There are three types of users:
  
 **Roles**
 
-*Admin*: Manages user roles
-*Booker*: Books trips and manages participant details
-*Guide*: Manages the trip and participants
+*Admin*: Manages user roles  
+*Booker*: Books trips and manages participant details    
+*Guide*: Manages the trip and participants   
 
 
 **Database Design**
