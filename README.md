@@ -19,9 +19,9 @@ There are three types of users:
 - Personal information (name, surname, age, contact)
 - Trip-related preferences (dietary needs, physical limitations, etc.)
 - The excursion they are booking
-*Guide Dashboard*: The guide can view the participant list, their preferences, and other necessary information for leading the trip
-*Administration*: The admin can assign roles to users and decide who will be the booker or guide for a specific trip
-*Trip Overview*: Both the booker and the guide can review trip details, including the number of participants, logistics, and assigned roles
+- *Guide Dashboard*: The guide can view the participant list, their preferences, and other necessary information for leading the trip
+- *Administration*: The admin can assign roles to users and decide who will be the booker or guide for a specific trip
+- *Trip Overview*: Both the booker and the guide can review trip details, including the number of participants, logistics, and assigned roles
 
 **Roles**
 
