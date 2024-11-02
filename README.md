@@ -2,7 +2,7 @@
 
 ## TRAVEL ORGANIZATION AND BOOKING APPLICATION
 
-### Developers
+## Developers
 - Duje Nizić
 - Martina Vukojević
 
