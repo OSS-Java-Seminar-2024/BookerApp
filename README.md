@@ -1,10 +1,10 @@
 # BookerApp
 
-## TRAVEL ORGANIZATION AND BOOKING APPLICATION
-
 ## Developers
 - Duje Nizić
 - Martina Vukojević
+
+## TRAVEL ORGANIZATION AND BOOKING APPLICATION
 
 **Booking Trips Application**
 
