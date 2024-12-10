@@ -1,13 +1,13 @@
-package com.duje.SeminarskiJava;
+package com.duje.seminar;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SeminarskiJavaApplication {
+public class SeminarApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SeminarskiJavaApplication.class, args);
+		SpringApplication.run(SeminarApplication.class, args);
 	}
 
 }
