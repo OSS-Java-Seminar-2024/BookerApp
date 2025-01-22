@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Page</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<h1>Welcome, <span th:text="${user.username}"></span></h1>
+
+<h2>Your Details</h2>
+<table>
+    <tr>
+        <th>Username</th>
+        <td th:text="${user.username}"></td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td th:text="${user.email}"></td>
+    </tr>
+    <tr>
+        <th>User Type</th>
+        <td th:text="${user.role}"></td>
+    </tr>
+</table>
+
+<h2>Available Trips</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Trip Name</th>
+        <th>Date</th>
+        <th>Location</th>
+        <th>Capacity</th>
+        <th>Guide ID</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="trip : ${availableTrips}">
+        <td th:text="${trip.tripName}"></td>
+        <td th:text="${trip.tripDate}"></td>
+        <td th:text="${trip.tripLocation}"></td>
+        <td th:text="${trip.tripCapacity}"></td>
+        <td th:text="${trip.tripBooker}"></td>
+        <td>
+            <!--    <form th:action="@{/reserve}" method="post">
+                    <input type="hidden" name="izletId" th:value="${trip.id}">
+                    <label for="brojOsoba">Number of People:</label>
+                    <input type="number" name="brojOsoba" min="1" required>
+                    <button type="submit">Reserve</button>
+                </form>-->
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="/">Go Back</a>
+    </body>
+    </html>
