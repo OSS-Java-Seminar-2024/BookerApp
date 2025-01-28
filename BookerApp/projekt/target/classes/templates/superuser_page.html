@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Superuser Dashboard</title>
+</head>
+<body>
+<h1>Welcome, Superuser!</h1>
+
+<h2>Available Trips:</h2>
+<table border="1">
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Trip Name</th>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Description</th>
+    <th>Location</th>
+    <th>Capacity</th>
+    <th>Booker</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="trip : ${trips}">
+    <td th:text="${trip.id}"></td>
+    <td th:text="${trip.tripName}"></td>
+    <td th:text="${#dates.format(trip.tripDate, 'dd/MM/yyyy')}"></td>
+    <td th:text="${trip.tripTime}"></td>
+    <td th:text="${trip.tripDescription}"></td>
+    <td th:text="${trip.tripLocation}"></td>
+    <td th:text="${trip.tripCapacity}"></td>
+    <td th:text="${trip.booker.username}"></td>
+  </tr>
+  </tbody>
+</table>
+
+<br>
+
+<h2>Add a New Trip:</h2>
+<form action="/superuser/add-trip" method="post">
+  <label>Trip Name: <input type="text" name="tripName" required></label><br>
+  <label>Trip Date: <input type="date" name="tripDate" required></label><br>
+  <label>Trip Time: <input type="time" name="tripTime" required></label><br>
+  <label>Trip Description: <input type="text" name="tripDescription" required></label><br>
+  <label>Location: <input type="text" name="tripLocation" required></label><br>
+  <label>Capacity: <input type="number" name="tripCapacity" required></label><br>
+
+  <label>Booker (Admin User):
+    <select name="bookerUsername" size="5" style="max-height: 100px; overflow-y: auto;" required>
+      <option th:each="admin : ${admins}" th:value="${admin.username}" th:text="${admin.username}"></option>
+    </select>
+  </label><br>
+
+  <button type="submit">Add Trip</button>
+</form>
+
+<br>
+<a href="/logout">Logout</a>
+</body>
+</html>

@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(-45deg, #03a9f4, #ff4987, #4caf50, #ffc107);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite; 
+            color: white;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background: linear-gradient(-45deg, #03a9f4, #ff4987, #4caf50, #ffc107);
+            }
+            50% {
+                background: linear-gradient(-45deg, #f44336, #2196f3, #ffeb3b, #9c27b0);
+            }
+            100% {
+                background: linear-gradient(-45deg, #03a9f4, #ff4987, #4caf50, #ffc107);
+            }
+        }
+
+        body.dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        header {
+            background-color: rgba(3, 169, 244, 0.9);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+
+        header.dark-mode {
+            background-color: #333333;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+
+        nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #ff4987;
+        }
+
+        body.dark-mode nav a {
+            color: #e0e0e0;
+        }
+
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+
+        .slideshow-images {
+            display: flex;
+            transition: transform 1s ease;
+        }
+
+        .slideshow-images img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 100px 20px;
+            color: white;
+            background: url('https://source.unsplash.com/1600x900/?travel') no-repeat center center/cover;
+            border-radius: 10px;
+            margin: 20px;
+        }
+
+        .hero.dark-mode {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.5em;
+        }
+
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .statistics {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            color: black;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 200px;
+        }
+
+        body.dark-mode .stat-card {
+            background: #333333;
+            color: #e0e0e0;
+        }
+
+        #details {
+            display: none;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.3s ease, transform 0.3s ease, font-size 0.3s ease;
+        }
+
+        #details.show {
+            display: block;
+            opacity: 1;
+            transform: scale(1);
+            font-size: 1.5em; 
+        }
+
+		#details table, #trips table {
+		    width: 100%;
+		    border-collapse: collapse;
+		    margin: 20px 0;
+		}
+
+		#details table th, #details table td,
+		#trips table th, #trips table td {
+		    padding: 12px;
+		    text-align: left;
+		    border: 1px solid #ddd;
+		    color: black; 
+		}
+
+		#details table th, #trips table th {
+		    background-color: #f4f4f4;
+		    font-weight: bold;
+		}
+
+		#details table td, #trips table td {
+		    background-color: #fff;
+		}
+		
+		#details table {
+		    font-size: 0.9em;
+		    width: 80%; 
+		    margin: 0 auto;
+		}
+
+		#details th, #details td {
+		    padding: 8px; 
+		}
+
+
+
+        .recommendations {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .recommendation-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 0 auto;
+            max-width: 400px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark-mode .recommendation-card {
+            background: #444444;
+            color: #e0e0e0;
+        }
+
+        .recommendation-card h3,
+        .recommendation-card p {
+            color: black;
+        }
+
+        body.dark-mode .recommendation-card h3,
+        body.dark-mode .recommendation-card p {
+            color: #e0e0e0; 
+        }
+
+        #tourist-attractions {
+            display: none;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.3s ease, transform 0.3s ease, font-size 0.3s ease;
+        }
+
+        #tourist-attractions.show {
+            display: block;
+            opacity: 1;
+            transform: scale(1);
+            font-size: 1.2em; 
+            margin-top: 20px;
+        }
+
+        #tourist-attractions p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+       
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            font-size: 1.1em;
+        }
+
+        th {
+            background-color: #03a9f4;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        body.dark-mode table {
+            background-color: #333333;
+        }
+
+        body.dark-mode th {
+            background-color: #2196f3;
+        }
+
+        body.dark-mode tr:hover {
+            background-color: #444444;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>BookerApp</h1>
+        <nav>
+            <a href="/">Go Back</a>
+            <a href="#" id="detailsLink">Your Details</a>
+            <a href="#trips">Reserve Your Trip with Us</a>
+            <button id="darkModeToggle"><i class="fas fa-moon"></i></button>
+        </nav>
+    </header>
+
+    
+    <div class="slideshow-container">
+        <div class="slideshow-images">
+            <img src="https://villasholidayscroatia.com/storage/app/uploads/public/63c/e7d/084/63ce7d0843a02458009323.webp" alt="Beach">
+            <img src="https://static1.squarespace.com/static/665604881782aa23525c3d06/665f692ee3287c5148005e65/665f6981e3287c51480068d0/1717529444783/?format=1500w" alt="Beach2">
+            <img src="https://media.brate.com/images/europa/chorwacja/makarska/makarska-5.jpeg?tr=n-hero" alt="Beach3">
+        </div>
+    </div>
+
+    <div class="hero">
+        <h1>Explore the World with Us</h1>
+        <p>Book your next adventure now!</p>
+    </div>
+
+    <div class="content">
+        <h1>Welcome <span th:text="${user.username}"></span>!</h1>
+
+        <div id="details">
+            <h2>Your Details</h2>
+            <table>
+                <tr>
+                    <th>Username</th>
+                    <td th:text="${user.username}"></td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td th:text="${user.email}"></td>
+                </tr>
+                <tr>
+                    <th>User Type</th>
+                    <td th:text="${user.role}"></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="statistics">
+            <div class="stat-card">
+                <h3>Total Users</h3>
+                <p>150</p>
+            </div>
+            <div class="stat-card">
+                <h3>Total Trips</h3>
+                <p>45</p>
+            </div>
+        </div>
+
+		<div id="trips">
+		    <h2>Available Trips</h2>
+		    <table>
+		        <thead>
+		            <tr>
+		                <th>Trip Name</th>
+		                <th>Date</th>
+		                <th>Location</th>
+		                <th>Capacity</th>
+		                <th>Guide</th>
+		                <th>Action</th> 
+		            </tr>
+		        </thead>
+		        <tbody>
+		            <tr>
+		                <td>Mountain Adventure</td>
+		                <td>2025-02-15</td>
+		                <td>Velebit</td>
+		                <td>20</td>
+		                <td>Guide001</td>
+		                <td><button class="reserve-btn">Reserve</button></td> 
+		            </tr>
+		            <tr>
+		                <td>City Tour</td>
+		                <td>2025-03-01</td>
+		                <td>Zagreb</td>
+		                <td>15</td>
+		                <td>Guide002</td>
+		                <td><button class="reserve-btn">Reserve</button></td>
+		            </tr>
+		            <tr>
+		                <td>Island Escape</td>
+		                <td>2025-04-10</td>
+		                <td>Hvar</td>
+		                <td>10</td>
+		                <td>Guide003</td>
+		                <td><button class="reserve-btn">Reserve</button></td> 
+		            </tr>
+		        </tbody>
+		    </table>
+		</div>
+
+        <div class="recommendations">
+            <h2>Recommended for You</h2>
+            <div class="recommendation-card">
+                <h3>Island Adventure</h3>
+                <p>Explore the beauty of the islands!</p>
+                <button id="learnMoreBtn">Learn More</button>
+            </div>
+        </div>
+
+        <div id="tourist-attractions">
+            <h3>Main Tourist Attractions in Croatia</h3>
+            <p>Croatia is known for its stunning coastline, crystal-clear Adriatic Sea, and rich cultural heritage. Some of the most famous tourist attractions include:</p>
+            <ul>
+                <li><strong>Dubrovnik:</strong> A UNESCO World Heritage site, this beautiful city is known for its medieval walls and stunning old town.</li>
+                <li><strong>Plitvice Lakes National Park:</strong> Famous for its cascading lakes and waterfalls, this national park is a nature lover’s paradise.</li>
+                <li><strong>Split:</strong> Home to the ancient Diocletian’s Palace, Split blends Roman architecture with a lively, modern city vibe.</li>
+                <li><strong>Zagreb:</strong> The capital of Croatia offers a unique blend of historical landmarks, museums, and vibrant street life.</li>
+                <li><strong>Hvar:</strong> A beautiful island known for its vineyards, beaches, and vibrant nightlife.</li>
+            </ul>
+            <p>These are just a few highlights – there are many more stunning places to explore in this beautiful country!</p>
+        </div>
+    </div>
+
+    <script>
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        darkModeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            document.querySelector('header').classList.toggle('dark-mode');
+            document.querySelectorAll('.hero').forEach(hero => hero.classList.toggle('dark-mode'));
+            document.querySelectorAll('.stat-card').forEach(card => card.classList.toggle('dark-mode'));
+            document.querySelectorAll('.trip-card').forEach(card => card.classList.toggle('dark-mode'));
+            document.querySelectorAll('.recommendation-card').forEach(card => card.classList.toggle('dark-mode'));
+        });
+
+        let index = 0;
+        const slides = document.querySelector('.slideshow-images');
+        const images = slides.children;
+
+        setInterval(() => {
+            index = (index + 1) % images.length;
+            slides.style.transform = `translateX(-${index * 100}%)`;
+        }, 3000);
+
+        var detailsLink = document.getElementById('detailsLink');
+        var detailsSection = document.getElementById('details');
+
+        detailsLink.addEventListener('click', function (event) {
+            event.preventDefault(); 
+            detailsSection.classList.toggle('show'); 
+            detailsSection.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        
+		document.querySelectorAll('.reserve-btn').forEach(button => {
+		        button.addEventListener('click', () => {
+		            alert('Trip successfully reserved!');
+		        });
+		    });
+		const learnMoreBtn = document.getElementById('learnMoreBtn');
+		const touristAttractionsSection = document.getElementById('tourist-attractions');
+
+		learnMoreBtn.addEventListener('click', () => {
+		    touristAttractionsSection.classList.toggle('show');
+		    touristAttractionsSection.scrollIntoView({ behavior: 'smooth' }); 
+		});
+
+        document.querySelectorAll('.trip-card button').forEach(button => {
+            button.addEventListener('click', () => {
+                alert('Trip successfully reserved!');
+            });
+        });
+    </script>
+</body>
+</html>  
