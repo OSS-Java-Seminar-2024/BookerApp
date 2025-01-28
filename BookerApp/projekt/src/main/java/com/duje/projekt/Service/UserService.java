@@ -58,7 +58,7 @@ public class UserService {
         } else {
             System.out.println("User not found");
         }
-        return null; // Authentication failed
+        return null; //authentication failed
     }
 
 
@@ -71,9 +71,13 @@ public class UserService {
     }
 
     public List<UserModel> getUsersByRole(String role) {
-        return userRepository.findByRole(role);
+        List<UserModel> users = userRepository.findByRole(role);
+        //System.out.println("Found users with role " + role + ": " + users.size()); 
+        return users;
     }
-
-
+ 
+    public List<UserModel> getAllUsers() {
+        return userRepository.findAll(); 
+    }
 
 }

@@ -16,6 +16,7 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
+        
         @keyframes gradientBG {
             0% {
                 background: linear-gradient(-45deg, #03a9f4, #ff4987, #4caf50, #ffc107);
@@ -28,6 +29,7 @@
             }
         }
 
+        
         body.dark-mode {
             background-color: #121212;
             color: #e0e0e0;
@@ -73,6 +75,7 @@
             background-color: #ff4987;
         }
 
+       
         body.dark-mode nav a {
             color: #e0e0e0;
         }
@@ -95,6 +98,7 @@
             border-radius: 10px;
         }
 
+       
         .hero {
             text-align: center;
             padding: 100px 20px;
@@ -117,6 +121,7 @@
             font-size: 1.5em;
         }
 
+      
         .content {
             padding: 20px;
             text-align: center;
@@ -138,6 +143,7 @@
             width: 200px;
         }
 
+        
         body.dark-mode .stat-card {
             background: #333333;
             color: #e0e0e0;
@@ -157,40 +163,38 @@
             font-size: 1.5em; 
         }
 
-		#details table, #trips table {
-		    width: 100%;
-		    border-collapse: collapse;
-		    margin: 20px 0;
-		}
+        #details table th, #details table td {
+            padding: 10px;
+            font-size: 1.2em; 
+        }
 
-		#details table th, #details table td,
-		#trips table th, #trips table td {
-		    padding: 12px;
-		    text-align: left;
-		    border: 1px solid #ddd;
-		    color: black; 
-		}
+        .trip-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
 
-		#details table th, #trips table th {
-		    background-color: #f4f4f4;
-		    font-weight: bold;
-		}
+        .trip-card {
+            background: rgba(255, 255, 255, 0.9);
+            color: black;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
 
-		#details table td, #trips table td {
-		    background-color: #fff;
-		}
-		
-		#details table {
-		    font-size: 0.9em;
-		    width: 80%; 
-		    margin: 0 auto;
-		}
+       
+        body.dark-mode .trip-card {
+            background: #333333;
+            color: #e0e0e0;
+        }
 
-		#details th, #details td {
-		    padding: 8px; 
-		}
-
-
+        .trip-card:hover {
+            transform: scale(1.05);
+        }
 
         .recommendations {
             margin-top: 50px;
@@ -207,6 +211,7 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
+       
         body.dark-mode .recommendation-card {
             background: #444444;
             color: #e0e0e0;
@@ -217,67 +222,10 @@
             color: black;
         }
 
+        
         body.dark-mode .recommendation-card h3,
         body.dark-mode .recommendation-card p {
             color: #e0e0e0; 
-        }
-
-        #tourist-attractions {
-            display: none;
-            opacity: 0;
-            transform: scale(0.95);
-            transition: opacity 0.3s ease, transform 0.3s ease, font-size 0.3s ease;
-        }
-
-        #tourist-attractions.show {
-            display: block;
-            opacity: 1;
-            transform: scale(1);
-            font-size: 1.2em; 
-            margin-top: 20px;
-        }
-
-        #tourist-attractions p {
-            font-size: 1.2em;
-            line-height: 1.6;
-        }
-
-       
-        table {
-            width: 100%;
-            margin-top: 20px;
-            border-collapse: collapse;
-            border-radius: 10px;
-            overflow: hidden;
-            background-color: rgba(255, 255, 255, 0.8);
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-            font-size: 1.1em;
-        }
-
-        th {
-            background-color: #03a9f4;
-            color: white;
-        }
-
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-
-        body.dark-mode table {
-            background-color: #333333;
-        }
-
-        body.dark-mode th {
-            background-color: #2196f3;
-        }
-
-        body.dark-mode tr:hover {
-            background-color: #444444;
         }
     </style>
 </head>
@@ -285,7 +233,7 @@
     <header>
         <h1>BookerApp</h1>
         <nav>
-            <a href="/">Go Back</a>
+            <a href="/">Log out</a>
             <a href="#" id="detailsLink">Your Details</a>
             <a href="#trips">Reserve Your Trip with Us</a>
             <button id="darkModeToggle"><i class="fas fa-moon"></i></button>
@@ -338,72 +286,30 @@
             </div>
         </div>
 
-		<div id="trips">
-		    <h2>Available Trips</h2>
-		    <table>
-		        <thead>
-		            <tr>
-		                <th>Trip Name</th>
-		                <th>Date</th>
-		                <th>Location</th>
-		                <th>Capacity</th>
-		                <th>Guide</th>
-		                <th>Action</th> 
-		            </tr>
-		        </thead>
-		        <tbody>
-		            <tr>
-		                <td>Mountain Adventure</td>
-		                <td>2025-02-15</td>
-		                <td>Velebit</td>
-		                <td>20</td>
-		                <td>Guide001</td>
-		                <td><button class="reserve-btn">Reserve</button></td> 
-		            </tr>
-		            <tr>
-		                <td>City Tour</td>
-		                <td>2025-03-01</td>
-		                <td>Zagreb</td>
-		                <td>15</td>
-		                <td>Guide002</td>
-		                <td><button class="reserve-btn">Reserve</button></td>
-		            </tr>
-		            <tr>
-		                <td>Island Escape</td>
-		                <td>2025-04-10</td>
-		                <td>Hvar</td>
-		                <td>10</td>
-		                <td>Guide003</td>
-		                <td><button class="reserve-btn">Reserve</button></td> 
-		            </tr>
-		        </tbody>
-		    </table>
-		</div>
+        <div id="trips" class="trip-container">
+            <h2>Available Trips</h2>
+            <div th:each="trip : ${availableTrips}" class="trip-card">
+                <h3 th:text="${trip.tripName}"></h3>
+                <p><strong>Date:</strong> <span th:text="${trip.tripDate}"></span></p>
+                <p><strong>Location:</strong> <span th:text="${trip.tripLocation}"></span></p>
+                <p><strong>Capacity:</strong> <span th:text="${trip.tripCapacity}"></span></p>
+                <p><strong>Guide ID:</strong> <span th:text="${trip.tripBooker}"></span></p>
+                <button>Reserve</button>
+            </div>
+        </div>
 
         <div class="recommendations">
             <h2>Recommended for You</h2>
             <div class="recommendation-card">
                 <h3>Island Adventure</h3>
                 <p>Explore the beauty of the islands!</p>
-                <button id="learnMoreBtn">Learn More</button>
+                <button>Learn More</button>
             </div>
-        </div>
-
-        <div id="tourist-attractions">
-            <h3>Main Tourist Attractions in Croatia</h3>
-            <p>Croatia is known for its stunning coastline, crystal-clear Adriatic Sea, and rich cultural heritage. Some of the most famous tourist attractions include:</p>
-            <ul>
-                <li><strong>Dubrovnik:</strong> A UNESCO World Heritage site, this beautiful city is known for its medieval walls and stunning old town.</li>
-                <li><strong>Plitvice Lakes National Park:</strong> Famous for its cascading lakes and waterfalls, this national park is a nature lover’s paradise.</li>
-                <li><strong>Split:</strong> Home to the ancient Diocletian’s Palace, Split blends Roman architecture with a lively, modern city vibe.</li>
-                <li><strong>Zagreb:</strong> The capital of Croatia offers a unique blend of historical landmarks, museums, and vibrant street life.</li>
-                <li><strong>Hvar:</strong> A beautiful island known for its vineyards, beaches, and vibrant nightlife.</li>
-            </ul>
-            <p>These are just a few highlights – there are many more stunning places to explore in this beautiful country!</p>
         </div>
     </div>
 
     <script>
+      
         const darkModeToggle = document.getElementById('darkModeToggle');
         darkModeToggle.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
@@ -414,6 +320,7 @@
             document.querySelectorAll('.recommendation-card').forEach(card => card.classList.toggle('dark-mode'));
         });
 
+       
         let index = 0;
         const slides = document.querySelector('.slideshow-images');
         const images = slides.children;
@@ -423,28 +330,17 @@
             slides.style.transform = `translateX(-${index * 100}%)`;
         }, 3000);
 
+        
         var detailsLink = document.getElementById('detailsLink');
         var detailsSection = document.getElementById('details');
 
         detailsLink.addEventListener('click', function (event) {
             event.preventDefault(); 
             detailsSection.classList.toggle('show'); 
+
+            
             detailsSection.scrollIntoView({ behavior: 'smooth' });
         });
-
-        
-		document.querySelectorAll('.reserve-btn').forEach(button => {
-		        button.addEventListener('click', () => {
-		            alert('Trip successfully reserved!');
-		        });
-		    });
-		const learnMoreBtn = document.getElementById('learnMoreBtn');
-		const touristAttractionsSection = document.getElementById('tourist-attractions');
-
-		learnMoreBtn.addEventListener('click', () => {
-		    touristAttractionsSection.classList.toggle('show');
-		    touristAttractionsSection.scrollIntoView({ behavior: 'smooth' }); 
-		});
 
         document.querySelectorAll('.trip-card button').forEach(button => {
             button.addEventListener('click', () => {
@@ -453,4 +349,4 @@
         });
     </script>
 </body>
-</html>  
+</html>

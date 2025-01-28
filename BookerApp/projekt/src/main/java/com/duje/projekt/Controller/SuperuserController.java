@@ -26,8 +26,15 @@ public class SuperuserController {
     public String superuserPage(Model model) {
         List<TripModel> trips = tripService.getAllAvailableTrips();
         List<UserModel> admins = userService.getUsersByRole("ADMIN");
+        List<UserModel> allUsers = userService.getAllUsers(); 
+
+
         model.addAttribute("trips", trips);
-        model.addAttribute("admins", admins);
+        model.addAttribute("admins", admins);  
+        model.addAttribute("users", allUsers); 
+        model.addAttribute("bookers", admins); 
+        model.addAttribute("allUsers", allUsers);
+
         return "superuser_page";
     }
 
@@ -38,7 +45,7 @@ public class SuperuserController {
             tripService.saveTripWithBooker(trip, bookerUsername);
             return "redirect:/superuser/dashboard";
         } catch (IllegalArgumentException e) {
-            return "error_page"; // Handle error gracefully
+            return "error_page"; 
         }
     }
 }
