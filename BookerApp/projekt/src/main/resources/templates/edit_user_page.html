@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>Edit User Details</h2>
+<form action="/superuser/update-user" method="post">
+  <input type="hidden" name="id" th:value="${user.id}">
+  <label>Username: <input type="text" name="username" th:value="${user.username}" required></label><br>
+  <label>First Name: <input type="text" name="firstName" th:value="${user.firstName}" required></label><br>
+  <label>Last Name: <input type="text" name="lastName" th:value="${user.lastName}" required></label><br>
+  <label>Email: <input type="email" name="email" th:value="${user.email}" required></label><br>
+  <label>Phone: <input type="text" name="phone" th:value="${user.phone}" required></label><br>
+  <label>Role: <select name="role" th:value="${user.role}">
+    <option value="USER">USER</option>
+    <option value="ADMIN">ADMIN</option>
+    <option value="SUPERUSER">SUPERUSER</option>
+  </select></label><br>
+  <button type="submit">Save Changes</button>
+</form>
+
+<a href="/superuser/dashboard">Cancel</a>
+
+</body>
+</html>
