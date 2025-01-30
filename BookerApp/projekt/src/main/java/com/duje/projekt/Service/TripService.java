@@ -38,5 +38,9 @@ public class TripService {
     public TripModel getTripById(Integer id) {
         return tripRepository.findById(id).orElse(null);
     }
+    public List<TripModel> getTripsByUserId(Integer userId) {
+        return tripRepository.findByBookerId(userId);
+    }
+
 
 }

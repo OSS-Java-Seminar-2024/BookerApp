@@ -1,28 +1,145 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Trip</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(-45deg, #03a9f4, #ff4987, #4caf50, #ffc107);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: white;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background: linear-gradient(-45deg, #03a9f4, #ff4987, #4caf50, #ffc107);
+            }
+            50% {
+                background: linear-gradient(-45deg, #f44336, #2196f3, #ffeb3b, #9c27b0);
+            }
+            100% {
+                background: linear-gradient(-45deg, #03a9f4, #ff4987, #4caf50, #ffc107);
+            }
+        }
+
+        .content {
+            padding: 20px;
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: black;
+        }
+
+        h2 {
+            text-align: center;
+            color: #03a9f4;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        label {
+            font-size: 1em;
+            font-weight: bold;
+        }
+
+        input, select {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 1em;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        input:focus, select:focus {
+            border-color: #03a9f4;
+            outline: none;
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 1.1em;
+            background-color: #03a9f4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ff4987;
+        }
+
+        .cancel-btn {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .cancel-btn a {
+            color: #03a9f4;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .cancel-btn a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-<h2>Edit Trip Details</h2>
-<form action="/superuser/update-trip" method="post">
-  <input type="hidden" name="id" th:value="${trip.id}">
-  <label>Trip Name: <input type="text" name="tripName" th:value="${trip.tripName}" required></label><br>
-  <label>Date: <input type="date" name="tripDate" th:value="${#dates.format(trip.tripDate, 'yyyy-MM-dd')}" required></label><br>
-  <label>Time: <input type="text" name="tripTime" th:value="${trip.tripTime}" required></label><br>
-  <label>Description: <input type="text" name="tripDescription" th:value="${trip.tripDescription}" required></label><br>
-  <label>Location: <input type="text" name="tripLocation" th:value="${trip.tripLocation}" required></label><br>
-  <label>Capacity: <input type="text" name="tripCapacity" th:value="${trip.tripCapacity}" required></label><br>
-  <label>Booker:
-    <select name="bookerUsername">
-      <option th:each="booker : ${bookers}" th:value="${booker.username}" th:text="${booker.username}" th:selected="${booker.username == trip.booker.username}"></option>
-    </select>
-  </label><br>
-  <button type="submit">Save Changes</button>
-</form>
-
-<a href="/superuser/dashboard">Cancel</a>
-
+    <div class="content">
+        <h2>Edit Trip Details</h2>
+        <form action="/superuser/update-trip" method="post">
+            <input type="hidden" name="id" th:value="${trip.id}">
+            
+            <label>Trip Name:
+                <input type="text" name="tripName" th:value="${trip.tripName}" required>
+            </label>
+            
+            <label>Date:
+                <input type="date" name="tripDate" th:value="${#dates.format(trip.tripDate, 'yyyy-MM-dd')}" required>
+            </label>
+            
+            <label>Time:
+                <input type="text" name="tripTime" th:value="${trip.tripTime}" required>
+            </label>
+            
+            <label>Description:
+                <input type="text" name="tripDescription" th:value="${trip.tripDescription}" required>
+            </label>
+            
+            <label>Location:
+                <input type="text" name="tripLocation" th:value="${trip.tripLocation}" required>
+            </label>
+            
+            <label>Capacity:
+                <input type="text" name="tripCapacity" th:value="${trip.tripCapacity}" required>
+            </label>
+            
+            <label>Booker:
+                <select name="bookerUsername">
+                    <option th:each="booker : ${bookers}" th:value="${booker.username}" th:text="${booker.username}" th:selected="${booker.username == trip.booker.username}"></option>
+                </select>
+            </label>
+            
+            <button type="submit">Save Changes</button>
+        </form>
+        
+        <div class="cancel-btn">
+            <a href="/superuser/dashboard">Cancel</a>
+        </div>
+    </div>
 </body>
 </html>

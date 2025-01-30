@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -49,7 +50,7 @@ public class UserCotroller {
     @PostMapping("/login")
     public String postLoginPage(@RequestParam String username, @RequestParam String password, HttpSession session) {
         System.out.println("Login request received for username: " + username);
-        System.out.println("Received raw password: " + password); // Debugging
+        System.out.println("Received raw password: " + password); 
 
         UserModel authenticatedUser = userService.authenticateUser(username, password);
 
@@ -70,6 +71,19 @@ public class UserCotroller {
             System.out.println("Login failed for user: " + username);
             return "error_page";
         }
+    }
+    @GetMapping("/user-trips/{id}")
+    public String getUserTrips(@PathVariable Integer id, Model model) {
+        UserModel user = userService.getUserById(id);
+        if (user == null) {
+            return "error_page";
+        }
+
+        List<TripModel> userTrips = tripService.getTripsByUserId(id);
+        model.addAttribute("user", user);
+        model.addAttribute("trips", userTrips);
+
+        return "user_trips_page"; 
     }
 
 

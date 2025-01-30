@@ -22,15 +22,15 @@ public class TripModel {
     String tripDescription;
     String tripLocation;
     String tripCapacity;
-    Integer tripBooker;
+    //Integer tripBooker;
 
 
-    // Many-to-One relationship with UserModel
+  
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private UserModel booker;
 
-    // One-to-Many relationship with ReservationModel
+   
     @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ReservationModel> reservations;
 
@@ -41,7 +41,7 @@ public class TripModel {
     public void setBooker(UserModel booker) {
         this.booker = booker;
         if (!booker.getTrips().contains(this)) {
-            booker.getTrips().add(this); // Ensure bidirectional consistency
+            booker.getTrips().add(this);
         }
     }
 
@@ -56,7 +56,7 @@ public class TripModel {
         this.tripDescription = tripDescription;
         this.tripLocation = tripLocation;
         this.tripCapacity = tripCapacity;
-        this.tripBooker = tripBooker;
+        //this.tripBooker = tripBooker;
     }
 
     @Override
@@ -69,7 +69,7 @@ public class TripModel {
                 ", tripDescription='" + tripDescription + '\'' +
                 ", tripLocation='" + tripLocation + '\'' +
                 ", tripCapacity='" + tripCapacity + '\'' +
-                ", tripBooker=" + tripBooker +
+                //", tripBooker=" + tripBooker +
                 '}';
     }
 
@@ -129,11 +129,11 @@ public class TripModel {
         this.tripCapacity = tripCapacity;
     }
 
-    public Integer getTripBooker() {
+    /*public Integer getTripBooker() {
         return tripBooker;
     }
 
     public void setTripBooker(Integer tripBooker) {
         this.tripBooker = tripBooker;
-    }
+    }*/
 }
