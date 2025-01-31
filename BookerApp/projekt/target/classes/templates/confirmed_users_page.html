@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmed Users</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(-45deg, #03a9f4, #ff4987, #4caf50, #ffc107);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: white;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body.dark-mode {
+            background: #121212;
+            color: #e0e0e0;
+            animation: none;
+        }
+
+        header {
+            background-color: rgba(3, 169, 244, 0.9);
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.5s;
+        }
+
+        header.dark-mode {
+            background-color: #1e1e1e;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+
+        .dark-mode-toggle {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: color 0.5s;
+        }
+
+        .dark-mode .dark-mode-toggle {
+            color: #e0e0e0;
+        }
+
+        .content {
+            padding: 20px;
+            max-width: 900px;
+            margin: 50px auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            color: black;
+            transition: background-color 0.5s, color 0.5s;
+        }
+
+        .content.dark-mode {
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+        }
+
+        h2 {
+            text-align: center;
+            color: #03a9f4;
+        }
+
+        h2.dark-mode {
+            color: #bb86fc;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #03a9f4;
+            color: white;
+        }
+
+        th.dark-mode {
+            background-color: #333333;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        tr.dark-mode:hover {
+            background-color: #333333;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            text-align: center;
+            color: #03a9f4;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>BookerApp</h1>
+        <button class="dark-mode-toggle" onclick="toggleDarkMode()">
+            <i class="fas fa-moon"></i>
+        </button>
+    </header>
+
+    <div class="content">
+        <h2>Confirmed Users for the Trip</h2>
+
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th>User Name</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="reservation : ${confirmedReservations}">
+                    <td th:text="${reservation.user.username}"></td>
+                    <td th:text="${reservation.user.firstName}"></td>
+                    <td th:text="${reservation.user.lastName}"></td>
+                    <td th:text="${reservation.user.email}"></td>
+                    <td th:text="${reservation.notes}"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a th:href="@{/admin/dashboard}" class="back-link">Back to Dashboard</a>
+    </div>
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            document.querySelector('header').classList.toggle('dark-mode');
+            document.querySelector('.content').classList.toggle('dark-mode');
+            document.querySelectorAll('h2').forEach(el => el.classList.toggle('dark-mode'));
+            document.querySelectorAll('th').forEach(el => el.classList.toggle('dark-mode'));
+            document.querySelectorAll('tr').forEach(el => el.classList.toggle('dark-mode'));
+        }
+    </script>
+</body>
+</html>
