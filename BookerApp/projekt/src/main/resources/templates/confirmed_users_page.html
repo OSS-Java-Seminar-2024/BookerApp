@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
+			
             margin: 0;
             font-family: Arial, sans-serif;
             background: linear-gradient(-45deg, #03a9f4, #ff4987, #4caf50, #ffc107);
@@ -15,7 +16,17 @@
             color: white;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
-
+		@keyframes gradientBG {
+			    0% {
+			        background: linear-gradient(-45deg, #B38B6D, #D1B28D, #F2C9A2, #E1C69D);
+			    }
+			    50% {
+			        background: linear-gradient(-45deg, #8F6E5F, #C4A79D, #F1C27D, #D89B6A); 
+			    }
+			    100% {
+			        background: linear-gradient(-45deg, #B38B6D, #D1B28D, #F2C9A2, #E1C69D); 
+			    }
+			}
         body.dark-mode {
             background: #121212;
             color: #e0e0e0;
