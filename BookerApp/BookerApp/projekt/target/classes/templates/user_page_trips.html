@@ -1,9 +1,0 @@
-<div id="userTrips" class="trip-container">
-    <h2>Your Trips</h2>
-    <div th:each="trip : ${userTrips}" class="trip-card">
-        <h3 th:text="${trip.tripName}"></h3>
-        <p><strong>Date:</strong> <span th:text="${#dates.format(trip.tripDate, 'dd/MM/yyyy')}"></span></p>
-        <p><strong>Location:</strong> <span th:text="${trip.tripLocation}"></span></p>
-        <p><strong>Capacity:</strong> <span th:text="${trip.tripCapacity}"></span></p>
-    </div>
-</div>
